@@ -7,6 +7,7 @@ import jakarta.enterprise.context.RequestScoped;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.Query;
+import jakarta.transaction.Transactional;
 import java.util.List;
 import ma.emsi.tpcustomeryechhab.entity.Customer;
 
@@ -20,11 +21,11 @@ public class CustomerManager {
        Query query = em.createNamedQuery("Customer.findAll");
        return query.getResultList();
     }
-
+    @Transactional
     public Customer update(Customer customer) {
        return em.merge(customer);
     }
-
+    @Transactional
     public void persist(Customer customer) {
        em.persist(customer);
     }
